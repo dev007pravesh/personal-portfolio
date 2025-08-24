@@ -110,6 +110,16 @@ const Header: React.FC = () => {
                     </Box>
                   </Box>
                 ))}
+                {/* Theme toggle for desktop */}
+                <IconButton
+                  aria-label="Toggle color mode"
+                  icon={colorMode === 'light' ? <FaMoonIcon /> : <FaSunIcon />}
+                  onClick={toggleColorMode}
+                  variant="ghost"
+                  size="sm"
+                  ml={2}
+                  display={{ base: 'none', lg: 'inline-flex' }}
+                />
               </HStack>
 
               {/* Download CV Button - lg and up */}
@@ -130,7 +140,7 @@ const Header: React.FC = () => {
               </Button>
             </HStack>
 
-            {/* Theme toggle and hamburger menu for md and below */}
+            {/* Theme toggle and hamburger menu for mobile/tablet */}
             <HStack spacing={2} display={{ base: 'flex', lg: 'none' }}>
               <IconButton
                 aria-label="Toggle color mode"
@@ -164,7 +174,7 @@ const Header: React.FC = () => {
 
 const MobileNav = () => {
   const { scrollToSection } = useSmoothScroll()
-  const { colorMode, toggleColorMode } = useColorMode()
+  // No theme toggle here!
   return (
     <Stack
       bg={useColorModeValue('white', 'gray.800')}
@@ -175,14 +185,6 @@ const MobileNav = () => {
       {NAV_ITEMS.map((navItem) => (
         <MobileNavItem key={navItem.label} {...navItem} scrollToSection={scrollToSection} />
       ))}
-      <IconButton
-        aria-label="Toggle color mode"
-        icon={colorMode === 'light' ? <FaMoonIcon /> : <FaSunIcon />}
-        onClick={toggleColorMode}
-        variant="ghost"
-        size="sm"
-        alignSelf="flex-start"
-      />
       <Button
         as={'a'}
         fontSize={'sm'}
