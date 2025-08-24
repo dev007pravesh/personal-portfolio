@@ -45,10 +45,25 @@ const ContactSection: React.FC = () => {
     e.preventDefault()
     setIsSubmitting(true)
 
-  // Replace PUBLIC_KEY with your actual EmailJS public key
-  const SERVICE_ID = 'service_9bzexn1';
-  const TEMPLATE_ID = 'template_2pfrggs';
-  const PUBLIC_KEY = 'aeq2O-BWYaM8maoSP'; // <-- Put your EmailJS public key here
+    // Use environment variables for EmailJS keys
+    const SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID;
+    const TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
+    const PUBLIC_KEY = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
+
+    // Debug: log env values (remove in production)
+    console.log('SERVICE_ID:', SERVICE_ID, 'TEMPLATE_ID:', TEMPLATE_ID, 'PUBLIC_KEY:', PUBLIC_KEY);
+
+    if (!SERVICE_ID || !TEMPLATE_ID || !PUBLIC_KEY) {
+      setIsSubmitting(false);
+      toast({
+        title: "Configuration Error",
+        description: "EmailJS environment variables are missing. Please check your .env file and restart the server.",
+        status: "error",
+        duration: 7000,
+        isClosable: true,
+      });
+      return;
+    }
 
     emailjs.send(
       SERVICE_ID,
@@ -61,27 +76,28 @@ const ContactSection: React.FC = () => {
       },
       PUBLIC_KEY
     )
-    .then(() => {
-      setIsSubmitting(false)
-      toast({
-        title: "Message sent!",
-        description: "Thank you for reaching out. I'll get back to you soon!",
-        status: "success",
-        duration: 5000,
-        isClosable: true,
+      .then(() => {
+        setIsSubmitting(false)
+        toast({
+          title: "Message sent!",
+          description: "Thank you for reaching out. I'll get back to you soon!",
+          status: "success",
+          duration: 5000,
+          isClosable: true,
+        })
+        setFormData({ name: '', email: '', subject: '', message: '' })
       })
-      setFormData({ name: '', email: '', subject: '', message: '' })
-    })
-    .catch(() => {
-      setIsSubmitting(false)
-      toast({
-        title: "Error",
-        description: "There was a problem sending your message. Please try again later.",
-        status: "error",
-        duration: 5000,
-        isClosable: true,
+      .catch((error) => {
+        setIsSubmitting(false)
+        console.error('EmailJS error:', error);
+        toast({
+          title: "Error",
+          description: "There was a problem sending your message. Please try again later.",
+          status: "error",
+          duration: 5000,
+          isClosable: true,
+        })
       })
-    })
   }
 
   const contactInfo = [
