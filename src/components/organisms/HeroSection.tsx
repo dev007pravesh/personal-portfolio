@@ -41,7 +41,7 @@ const HeroSection: React.FC = () => {
       alignItems="center"
       position="relative"
       overflow="hidden"
-      pt={{ base: 20, md: 24, lg: 0 }}
+      pt={{ base: 10, md: 20, lg: 0 }}
     >
       {/* Background decoration */}
       <Box
@@ -77,7 +77,7 @@ const HeroSection: React.FC = () => {
                 fontSize={{ base: "md", md: "lg" }}
                 textTransform="uppercase"
                 letterSpacing="wider"
-                pt={{ base: 4, md: 0, lg: 0 }}
+                pt={{ base: 1, md: 0, lg: 0 }}
               >
                 Welcome to my portfolio
               </Text>

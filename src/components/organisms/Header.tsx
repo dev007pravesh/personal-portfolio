@@ -83,6 +83,7 @@ const Header: React.FC = () => {
             </Flex>
 
             <HStack spacing={{ base: 4, md: 8 }} alignItems={'center'}>
+              {/* Navigation Menu (lg and up) */}
               <HStack
                 as={'nav'}
                 spacing={{ base: 2, md: 4 }}
@@ -110,44 +111,8 @@ const Header: React.FC = () => {
                   </Box>
                 ))}
               </HStack>
-              
-              {/* Medium screen navigation (tablets) */}
-              <HStack
-                as={'nav'}
-                spacing={2}
-                display={{ base: 'none', md: 'flex', lg: 'none' }}
-              >
-                {NAV_ITEMS.slice(0, 3).map((navItem) => (
-                  <Box key={navItem.label}>
-                    <Box
-                      as="button"
-                      p={1}
-                      onClick={() => scrollToSection(navItem.href.replace('#', ''))}
-                      fontSize={'xs'}
-                      fontWeight={500}
-                      color={color}
-                      bg="transparent"
-                      border="none"
-                      cursor="pointer"
-                      _hover={{
-                        textDecoration: 'none',
-                        color: useColorModeValue('gray.800', 'white'),
-                      }}
-                    >
-                      {navItem.label}
-                    </Box>
-                  </Box>
-                ))}
-              </HStack>
 
-              <IconButton
-                aria-label="Toggle color mode"
-                icon={colorMode === 'light' ? <FaMoonIcon /> : <FaSunIcon />}
-                onClick={toggleColorMode}
-                variant="ghost"
-                size="sm"
-              />
-
+              {/* Download CV Button - lg and up */}
               <Button
                 as={'a'}
                 display={{ base: 'none', lg: 'inline-flex' }}
@@ -165,15 +130,25 @@ const Header: React.FC = () => {
               </Button>
             </HStack>
 
-            <IconButton
-              display={{ base: 'flex', lg: 'none' }}
-              onClick={onToggle}
-              icon={
-                isOpen ? <CloseIcon w={5} h={5} /> : <HamburgerIcon w={5} h={5} />
-              }
-              variant={'ghost'}
-              aria-label={'Toggle Navigation'}
-            />
+            {/* Theme toggle and hamburger menu for md and below */}
+            <HStack spacing={2} display={{ base: 'flex', lg: 'none' }}>
+              <IconButton
+                aria-label="Toggle color mode"
+                icon={colorMode === 'light' ? <FaMoonIcon /> : <FaSunIcon />}
+                onClick={toggleColorMode}
+                variant="ghost"
+                size="sm"
+              />
+              <IconButton
+                display={{ base: 'flex', lg: 'none' }}
+                onClick={onToggle}
+                icon={
+                  isOpen ? <CloseIcon w={5} h={5} /> : <HamburgerIcon w={5} h={5} />
+                }
+                variant={'ghost'}
+                aria-label={'Toggle Navigation'}
+              />
+            </HStack>
           </Flex>
         </Container>
       </Flex>
@@ -189,16 +164,40 @@ const Header: React.FC = () => {
 
 const MobileNav = () => {
   const { scrollToSection } = useSmoothScroll()
-  
+  const { colorMode, toggleColorMode } = useColorMode()
   return (
     <Stack
       bg={useColorModeValue('white', 'gray.800')}
       p={4}
-      display={{ lg: 'none' }}
+      display={{ md: 'none' }}
+      spacing={4}
     >
       {NAV_ITEMS.map((navItem) => (
         <MobileNavItem key={navItem.label} {...navItem} scrollToSection={scrollToSection} />
       ))}
+      <IconButton
+        aria-label="Toggle color mode"
+        icon={colorMode === 'light' ? <FaMoonIcon /> : <FaSunIcon />}
+        onClick={toggleColorMode}
+        variant="ghost"
+        size="sm"
+        alignSelf="flex-start"
+      />
+      <Button
+        as={'a'}
+        fontSize={'sm'}
+        fontWeight={600}
+        color={'white'}
+        bg={'brand.500'}
+        href={portfolioData.personalInfo.resumeUrl}
+        target="_blank"
+        _hover={{
+          bg: 'brand.600',
+        }}
+        alignSelf="flex-start"
+      >
+        Download CV
+      </Button>
     </Stack>
   )
 }
