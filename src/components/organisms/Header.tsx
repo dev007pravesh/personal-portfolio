@@ -69,24 +69,24 @@ const Header: React.FC = () => {
                 size="sm"
                 src={portfolioData.personalInfo.avatar}
                 name={portfolioData.personalInfo.name}
-                mr={3}
+                mr={{ base: 2, md: 3 }}
               />
               <Text
                 textAlign={useColorModeValue('left', 'left')}
                 fontFamily={'heading'}
                 color={useColorModeValue('gray.800', 'white')}
                 fontWeight="bold"
-                fontSize="lg"
+                fontSize={{ base: 'sm', md: 'lg' }}
               >
                 {portfolioData.personalInfo.name}
               </Text>
             </Flex>
 
-            <HStack spacing={8} alignItems={'center'}>
+            <HStack spacing={{ base: 4, md: 8 }} alignItems={'center'}>
               <HStack
                 as={'nav'}
-                spacing={4}
-                display={{ base: 'none', md: 'flex' }}
+                spacing={{ base: 2, md: 4 }}
+                display={{ base: 'none', lg: 'flex' }}
               >
                 {NAV_ITEMS.map((navItem) => (
                   <Box key={navItem.label}>
@@ -95,6 +95,35 @@ const Header: React.FC = () => {
                       p={2}
                       onClick={() => scrollToSection(navItem.href.replace('#', ''))}
                       fontSize={'sm'}
+                      fontWeight={500}
+                      color={color}
+                      bg="transparent"
+                      border="none"
+                      cursor="pointer"
+                      _hover={{
+                        textDecoration: 'none',
+                        color: useColorModeValue('gray.800', 'white'),
+                      }}
+                    >
+                      {navItem.label}
+                    </Box>
+                  </Box>
+                ))}
+              </HStack>
+              
+              {/* Medium screen navigation (tablets) */}
+              <HStack
+                as={'nav'}
+                spacing={2}
+                display={{ base: 'none', md: 'flex', lg: 'none' }}
+              >
+                {NAV_ITEMS.slice(0, 3).map((navItem) => (
+                  <Box key={navItem.label}>
+                    <Box
+                      as="button"
+                      p={1}
+                      onClick={() => scrollToSection(navItem.href.replace('#', ''))}
+                      fontSize={'xs'}
                       fontWeight={500}
                       color={color}
                       bg="transparent"
@@ -121,7 +150,7 @@ const Header: React.FC = () => {
 
               <Button
                 as={'a'}
-                display={{ base: 'none', md: 'inline-flex' }}
+                display={{ base: 'none', lg: 'inline-flex' }}
                 fontSize={'sm'}
                 fontWeight={600}
                 color={'white'}
@@ -137,7 +166,7 @@ const Header: React.FC = () => {
             </HStack>
 
             <IconButton
-              display={{ base: 'flex', md: 'none' }}
+              display={{ base: 'flex', lg: 'none' }}
               onClick={onToggle}
               icon={
                 isOpen ? <CloseIcon w={5} h={5} /> : <HamburgerIcon w={5} h={5} />
@@ -165,7 +194,7 @@ const MobileNav = () => {
     <Stack
       bg={useColorModeValue('white', 'gray.800')}
       p={4}
-      display={{ md: 'none' }}
+      display={{ lg: 'none' }}
     >
       {NAV_ITEMS.map((navItem) => (
         <MobileNavItem key={navItem.label} {...navItem} scrollToSection={scrollToSection} />

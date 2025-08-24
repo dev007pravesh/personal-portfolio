@@ -69,6 +69,40 @@ section, main, .chakra-container {
     padding-left: 0.75rem !important;
     padding-right: 0.75rem !important;
   }
+  
+  /* Mobile-specific improvements */
+  .chakra-text {
+    font-size: 0.875rem !important;
+  }
+  
+  .chakra-heading {
+    font-size: 1.5rem !important;
+  }
+}
+
+/* Mobile desktop mode improvements */
+@media (max-width: 768px) {
+  /* Ensure proper text wrapping */
+  .chakra-text {
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+  }
+  
+  /* Improve button sizing on mobile */
+  .chakra-button {
+    min-height: 2.5rem !important;
+    padding: 0.5rem 1rem !important;
+  }
+  
+  /* Better spacing for mobile */
+  .chakra-stack {
+    gap: 0.75rem !important;
+  }
+  
+  /* Improve navigation on mobile */
+  .chakra-hstack {
+    gap: 0.5rem !important;
+  }
 }
 
 /* Smooth scrolling */

@@ -41,6 +41,7 @@ const HeroSection: React.FC = () => {
       alignItems="center"
       position="relative"
       overflow="hidden"
+      pt={{ base: 20, md: 24, lg: 0 }}
     >
       {/* Background decoration */}
       <Box
@@ -68,14 +69,15 @@ const HeroSection: React.FC = () => {
 
       <Container maxW="full" px={{ base: 4, md: 8, lg: 12 }} position="relative" zIndex={1}>
         <SimpleGrid columns={{ base: 1, lg: 2 }} spacing={12} alignItems="center">
-          <VStack spacing={8} align="flex-start">
-            <VStack spacing={4} align="flex-start">
+          <VStack spacing={{ base: 6, md: 8 }} align="flex-start">
+            <VStack spacing={{ base: 6, md: 4 }} align="flex-start">
               <Text
                 color="brand.500"
                 fontWeight="semibold"
-                fontSize="lg"
+                fontSize={{ base: "md", md: "lg" }}
                 textTransform="uppercase"
                 letterSpacing="wider"
+                pt={{ base: 4, md: 0, lg: 0 }}
               >
                 Welcome to my portfolio
               </Text>
