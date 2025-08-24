@@ -15,6 +15,7 @@ import {
   useColorMode,
 } from '@chakra-ui/react'
 import { useSmoothScroll } from '../../hooks/useSmoothScroll'
+import { useScrollHeader } from '../../hooks/useScrollHeader'
 import {
   HamburgerIcon,
   CloseIcon,
@@ -35,20 +36,30 @@ const Header: React.FC = () => {
   const { isOpen, onToggle } = useDisclosure()
   const { colorMode, toggleColorMode } = useColorMode()
   const { scrollToSection } = useSmoothScroll()
+  const { isVisible } = useScrollHeader()
   const bg = useColorModeValue('white', 'gray.800')
   const color = useColorModeValue('gray.600', 'white')
 
   return (
-    <Box>
+    <Box
+      position="fixed"
+      top={0}
+      left={0}
+      right={0}
+      zIndex={1000}
+      transform={isVisible ? 'translateY(0)' : 'translateY(-100%)'}
+      transition="transform 0.3s ease-in-out"
+      bg={bg}
+      borderBottom={1}
+      borderStyle={'solid'}
+      borderColor={useColorModeValue('gray.200', 'gray.700')}
+      boxShadow={isVisible ? '0 2px 10px rgba(0,0,0,0.1)' : 'none'}
+    >
       <Flex
-        bg={bg}
         color={color}
         minH={'60px'}
         py={{ base: 2 }}
         px={{ base: 4 }}
-        borderBottom={1}
-        borderStyle={'solid'}
-        borderColor={useColorModeValue('gray.200', 'gray.700')}
         align={'center'}
       >
         <Container maxW="full" px={{ base: 4, md: 8, lg: 12 }}>

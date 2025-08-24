@@ -13,7 +13,7 @@ function App() {
   return (
     <Box w="100%" minH="100vh" className="portfolio-container">
       <Header />
-      <main style={{ width: '100vw', overflowX: 'hidden' }}>
+      <main style={{ width: '100vw', overflowX: 'hidden', paddingTop: '60px' }}>
         <HeroSection />
         <AboutSection />
         <SkillsSection />

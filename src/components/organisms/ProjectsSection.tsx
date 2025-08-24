@@ -12,10 +12,12 @@ import Heading from '../atoms/Heading'
 import CustomText from '../atoms/Text'
 import ProjectCard from '../molecules/ProjectCard'
 import CustomButton from '../atoms/Button'
+import { useSmoothScroll } from '../../hooks/useSmoothScroll'
 
 const ProjectsSection: React.FC = () => {
   const [filter, setFilter] = useState<'all' | 'featured'>('all')
   const bg = useColorModeValue('white', 'gray.900')
+  const { scrollToSection } = useSmoothScroll()
   
   const filteredProjects = filter === 'featured' 
     ? portfolioData.projects.filter(project => project.featured)
@@ -83,6 +85,7 @@ const ProjectsSection: React.FC = () => {
                 py={6}
                 bgGradient="linear(to-r, brand.500, brand.600)"
                 color="white"
+                onClick={() => scrollToSection('contact')}
                 _hover={{
                   bgGradient: "linear(to-r, brand.600, brand.700)",
                   transform: "translateY(-2px)",

@@ -185,7 +185,7 @@ const HeroSection: React.FC = () => {
               <Image
                 src={heroImage}
                 alt="Hero"
-                fallbackSrc="https://via.placeholder.com/400x500/2D3748/FFFFFF?text=Hero+Image"
+                fallbackSrc="https://randomuser.me/api/portraits/lego/8.jpg"
                 borderRadius="2xl"
                 objectFit="cover"
                 width="100%"
